@@ -1,4 +1,4 @@
-package com.coccoc.coccoctestapp;
+package com.coccoc.coccoctestapp.ui.main;
 
 import android.support.annotation.NonNull;
 
@@ -15,7 +15,7 @@ import retrofit2.Response;
  * Created by Luong Vo on 1/20/17.
  */
 
-public class MainActivityInteractorImpl implements MainActivityInteractor {
+public class MainInteractor implements MainContract.Interactor {
 
     @Override
     public void getMovies(@NonNull final OnAPIListener listener) {

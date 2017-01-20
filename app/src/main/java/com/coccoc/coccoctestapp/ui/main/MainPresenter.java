@@ -1,4 +1,4 @@
-package com.coccoc.coccoctestapp;
+package com.coccoc.coccoctestapp.ui.main;
 
 import android.util.Log;
 
@@ -16,25 +16,26 @@ import retrofit2.Response;
  * Created by Luong Vo on 1/20/17.
  */
 
-public class MainActivityPresenterImpl implements MainActivityPresenter {
+public class MainPresenter implements MainContract.Presenter {
 
-    private MainActivityView mView;
-    private MainActivityInteractor mInteractor;
+    private MainContract.View mView;
+    private MainContract.Interactor mInteractor;
 
     private List<Movie> movies;
 
-    public MainActivityPresenterImpl(MainActivityView view) {
+    public MainPresenter(MainContract.View view) {
         mView = view;
-        mInteractor = new MainActivityInteractorImpl();
+        mInteractor = new MainInteractor();
     }
 
     @Override
-    public void onInit() {
+    public void init() {
         movies = new ArrayList<>();
         callGetMoviesAPI();
     }
 
     private void callGetMoviesAPI() {
+        mView.showLoadingDialog();
         mInteractor.getMovies(new OnAPIListener<MovieListResponse>() {
             @Override
             public void onSuccess(Response<MovieListResponse> response) {

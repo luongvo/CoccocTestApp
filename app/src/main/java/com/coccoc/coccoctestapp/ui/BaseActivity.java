@@ -1,15 +1,16 @@
-package com.coccoc.coccoctestapp;
+package com.coccoc.coccoctestapp.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
+import com.coccoc.coccoctestapp.R;
 import com.coccoc.coccoctestapp.utils.FlowUtils;
 
 /**
  * Created by Luong Vo on 1/20/17.
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseActivityView {
+public abstract class BaseActivity extends AppCompatActivity implements BaseContract.View {
 
     @Override
     public void showLoadingDialog() {
