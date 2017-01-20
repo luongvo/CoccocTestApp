@@ -3,12 +3,8 @@ package com.coccoc.coccoctestapp.services;
 import com.coccoc.coccoctestapp.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 
-import java.lang.reflect.Type;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -17,9 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
@@ -42,18 +36,14 @@ public class ServiceGenerator {
 
     static {
         sGson = new GsonBuilder()
-                .registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-                    @Override
-                    public Date deserialize(JsonElement json, Type typeOfT,
-                                            JsonDeserializationContext context) throws JsonParseException {
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                        try {
-                            return dateFormat.parse(json.getAsString());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        return new Date();
+                .registerTypeAdapter(Date.class, (JsonDeserializer<Date>) (json, typeOfT, context) -> {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    try {
+                        return dateFormat.parse(json.getAsString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
+                    return new Date();
                 })
                 .create();
     }
@@ -87,13 +77,7 @@ public class ServiceGenerator {
         }
 
         try {
-            final HostnameVerifier hostnameVerifier = new HostnameVerifier() {
-                @Override
-                public boolean verify(final String hostname, final SSLSession session) {
-                    return true;
-                }
-            };
-            builder.hostnameVerifier(hostnameVerifier);
+            builder.hostnameVerifier((hostname, session) -> true);
             builder.sslSocketFactory(ctx.getSocketFactory());
         } catch (final Exception exception) {
             exception.printStackTrace();
