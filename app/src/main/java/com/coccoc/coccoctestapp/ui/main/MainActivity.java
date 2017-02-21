@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity
     }
 
     private void initDataList(List<Movie> movies) {
-        mMovieAdapter = new MovieAdapter(this, movies);
+        mMovieAdapter = new MovieAdapter(movies);
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvMovies.setLayoutManager(linearLayoutManager);

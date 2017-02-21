@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
 
+import com.coccoc.coccoctestapp.utils.StringUtils;
 import com.google.gson.annotations.SerializedName;
 import com.squareup.picasso.Picasso;
 
@@ -75,6 +76,10 @@ public class Movie implements Parcelable {
 
     public Date getReleaseDate() {
         return releaseDate;
+    }
+
+    public String getReleaseDateStr() {
+        return StringUtils.formatDate_ddMMyyyy(releaseDate);
     }
 
     public String getCategory() {
