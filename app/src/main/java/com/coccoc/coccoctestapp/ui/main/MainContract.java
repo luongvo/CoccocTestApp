@@ -15,16 +15,23 @@ import java.util.List;
 public interface MainContract {
 
     interface View extends BaseActivityContract.View {
+
         void initUI(List<Movie> movies);
 
         void refreshDataList(boolean hasData);
+
+        void finishRefresh();
     }
 
     interface Presenter extends BaseActivityContract.Presenter {
+
         void init();
+
+        void handleRefresh();
     }
 
     interface Interactor extends BaseActivityContract.Interactor {
+
         void getMovies(@NonNull OnAPIListener listener);
     }
 }

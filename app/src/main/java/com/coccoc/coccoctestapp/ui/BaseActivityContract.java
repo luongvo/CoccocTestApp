@@ -7,6 +7,7 @@ package com.coccoc.coccoctestapp.ui;
 public interface BaseActivityContract {
 
     interface View {
+
         void showLoadingDialog();
 
         void dismissLoadingDialog();

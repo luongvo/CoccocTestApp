@@ -31,15 +31,21 @@ public class MainPresenter implements MainContract.Presenter {
         movies = new ArrayList<>();
         mView.initUI(movies);
 
+        mView.showLoadingDialog();
+        callGetMoviesAPI();
+    }
+
+    @Override
+    public void handleRefresh() {
         callGetMoviesAPI();
     }
 
     private void callGetMoviesAPI() {
-        mView.showLoadingDialog();
         mInteractor.getMovies(new OnAPIListener<MovieListResponse>() {
             @Override
             public void onSuccess(Response<MovieListResponse> response) {
                 if (mView == null) return;
+                mView.finishRefresh();
                 mView.dismissLoadingDialog();
 
                 List<Movie> result = response.body().getMovies();
@@ -53,6 +59,7 @@ public class MainPresenter implements MainContract.Presenter {
             @Override
             public void onFailure(String message) {
                 if (mView == null) return;
+                mView.finishRefresh();
                 mView.dismissLoadingDialog();
                 mView.showFailureDialog(message);
             }
@@ -60,6 +67,7 @@ public class MainPresenter implements MainContract.Presenter {
             @Override
             public void onServerFailure() {
                 if (mView == null) return;
+                mView.finishRefresh();
                 mView.dismissLoadingDialog();
                 mView.showServerFailureDialog();
             }
