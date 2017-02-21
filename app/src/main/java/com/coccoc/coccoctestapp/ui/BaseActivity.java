@@ -10,7 +10,7 @@ import com.coccoc.coccoctestapp.utils.FlowUtils;
  * Created by Luong Vo on 1/20/17.
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseContract.View {
+public abstract class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
 
     @Override
     public void showLoadingDialog() {

@@ -7,6 +7,7 @@ import retrofit2.Response;
  */
 
 public interface OnAPIListener<T> {
+
     void onSuccess(Response<T> response);
 
     void onFailure(String message);

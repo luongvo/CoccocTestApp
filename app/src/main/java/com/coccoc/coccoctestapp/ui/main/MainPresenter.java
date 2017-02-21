@@ -1,7 +1,5 @@
 package com.coccoc.coccoctestapp.ui.main;
 
-import android.util.Log;
-
 import com.coccoc.coccoctestapp.models.Movie;
 import com.coccoc.coccoctestapp.services.OnAPIListener;
 import com.coccoc.coccoctestapp.services.dto.MovieListResponse;
@@ -31,6 +29,8 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void init() {
         movies = new ArrayList<>();
+        mView.initUI(movies);
+
         callGetMoviesAPI();
     }
 
@@ -42,10 +42,12 @@ public class MainPresenter implements MainContract.Presenter {
                 if (mView == null) return;
                 mView.dismissLoadingDialog();
 
-                movies.clear();
-                movies.addAll(response.body().getMovies());
+                List<Movie> result = response.body().getMovies();
 
-                Log.i("==", movies.size() + "_");
+                movies.clear();
+                movies.addAll(result);
+
+                mView.refreshDataList(!movies.isEmpty());
             }
 
             @Override

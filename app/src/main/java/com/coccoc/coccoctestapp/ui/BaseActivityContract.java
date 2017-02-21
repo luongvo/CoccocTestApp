@@ -4,7 +4,7 @@ package com.coccoc.coccoctestapp.ui;
  * Created by Luong Vo on 1/20/17.
  */
 
-public interface BaseContract {
+public interface BaseActivityContract {
 
     interface View {
         void showLoadingDialog();

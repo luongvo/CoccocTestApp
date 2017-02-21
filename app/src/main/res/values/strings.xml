@@ -6,4 +6,7 @@
     <string name="error">Error</string>
     <string name="something_went_wrong_could_not_get_response">Something went wrong! Could not get response from server.</string>
     <string name="can_not_connect_to_server">Can\'t connect to server. Try again</string>
+
+    <string name="no_movie">No movie</string>
+    <string name="release_date">Release date (%s)</string>
 </resources>
