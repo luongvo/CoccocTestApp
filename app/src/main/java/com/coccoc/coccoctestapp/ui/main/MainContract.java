@@ -21,6 +21,8 @@ public interface MainContract {
         void refreshDataList(boolean hasData);
 
         void finishRefresh();
+
+        void navigateToDetailScreen(Movie movie);
     }
 
     interface Presenter extends BaseActivityContract.Presenter {
@@ -28,6 +30,8 @@ public interface MainContract {
         void init();
 
         void handleRefresh();
+
+        void handleMovieListItemClicked(int position);
     }
 
     interface Interactor extends BaseActivityContract.Interactor {

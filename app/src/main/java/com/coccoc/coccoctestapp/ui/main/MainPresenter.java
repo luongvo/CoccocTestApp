@@ -19,7 +19,7 @@ public class MainPresenter implements MainContract.Presenter {
     private MainContract.View mView;
     private MainContract.Interactor mInteractor;
 
-    private List<Movie> movies;
+    private List<Movie> mMovies;
 
     public MainPresenter(MainContract.View view) {
         mView = view;
@@ -28,8 +28,8 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void init() {
-        movies = new ArrayList<>();
-        mView.initUI(movies);
+        mMovies = new ArrayList<>();
+        mView.initUI(mMovies);
 
         mView.showLoadingDialog();
         callGetMoviesAPI();
@@ -38,6 +38,13 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void handleRefresh() {
         callGetMoviesAPI();
+    }
+
+    @Override
+    public void handleMovieListItemClicked(int position) {
+        if (mView == null) return;
+        Movie movie = mMovies.get(position);
+        mView.navigateToDetailScreen(movie);
     }
 
     private void callGetMoviesAPI() {
@@ -50,10 +57,10 @@ public class MainPresenter implements MainContract.Presenter {
 
                 List<Movie> result = response.body().getMovies();
 
-                movies.clear();
-                movies.addAll(result);
+                mMovies.clear();
+                mMovies.addAll(result);
 
-                mView.refreshDataList(!movies.isEmpty());
+                mView.refreshDataList(!mMovies.isEmpty());
             }
 
             @Override

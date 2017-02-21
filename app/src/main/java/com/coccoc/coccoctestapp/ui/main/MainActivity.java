@@ -1,5 +1,6 @@
 package com.coccoc.coccoctestapp.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +10,9 @@ import android.view.View;
 import com.coccoc.coccoctestapp.R;
 import com.coccoc.coccoctestapp.models.Movie;
 import com.coccoc.coccoctestapp.ui.BaseActivity;
-import com.coccoc.coccoctestapp.widgets.VerticalSpaceItemDecoration;
+import com.coccoc.coccoctestapp.ui.detail.MovieDetailActivity;
+import com.coccoc.coccoctestapp.widgets.recyclerview.ItemClickSupport;
+import com.coccoc.coccoctestapp.widgets.recyclerview.VerticalSpaceItemDecoration;
 
 import java.util.List;
 
@@ -69,6 +72,12 @@ public class MainActivity extends BaseActivity
         }
     }
 
+    @Override
+    public void navigateToDetailScreen(Movie movie) {
+        Intent intent = new Intent(this, MovieDetailActivity.class);
+        startActivity(intent);
+    }
+
     private void initDataList(List<Movie> movies) {
         mMovieAdapter = new MovieAdapter(this, movies);
 
@@ -76,5 +85,9 @@ public class MainActivity extends BaseActivity
         rvMovies.setLayoutManager(linearLayoutManager);
         rvMovies.addItemDecoration(new VerticalSpaceItemDecoration(this));
         rvMovies.setAdapter(mMovieAdapter);
+
+        // add OnItemClick into RecyclerView
+        ItemClickSupport.addTo(rvMovies).setOnItemClickListener(
+                (recyclerView, position, v) -> mPresenter.handleMovieListItemClicked(position));
     }
 }

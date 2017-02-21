@@ -1,5 +1,6 @@
 package com.coccoc.coccoctestapp.ui;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
@@ -11,6 +12,17 @@ import com.coccoc.coccoctestapp.utils.FlowUtils;
  */
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
+
+    protected void setUpActionBar(String title, boolean isBackVisible) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(title);
+
+        // set back button
+        if (isBackVisible) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
 
     @Override
     public void showLoadingDialog() {

@@ -1,4 +1,4 @@
-package com.coccoc.coccoctestapp.widgets;
+package com.coccoc.coccoctestapp.widgets.recyclerview;
 
 import android.content.Context;
 import android.graphics.Rect;
