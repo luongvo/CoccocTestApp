@@ -11,6 +11,7 @@ import com.coccoc.coccoctestapp.R;
 import com.coccoc.coccoctestapp.models.Movie;
 import com.coccoc.coccoctestapp.ui.BaseActivity;
 import com.coccoc.coccoctestapp.ui.detail.MovieDetailActivity;
+import com.coccoc.coccoctestapp.utils.Constants;
 import com.coccoc.coccoctestapp.widgets.recyclerview.ItemClickSupport;
 import com.coccoc.coccoctestapp.widgets.recyclerview.VerticalSpaceItemDecoration;
 
@@ -75,6 +76,7 @@ public class MainActivity extends BaseActivity
     @Override
     public void navigateToDetailScreen(Movie movie) {
         Intent intent = new Intent(this, MovieDetailActivity.class);
+        intent.putExtra(Constants.MOVIE_KEY, movie);
         startActivity(intent);
     }
 

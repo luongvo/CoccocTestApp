@@ -13,15 +13,9 @@ import com.coccoc.coccoctestapp.utils.FlowUtils;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
 
-    protected void setUpActionBar(String title, boolean isBackVisible) {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(title);
-
-        // set back button
-        if (isBackVisible) {
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+    @Override
+    public void finishScreen() {
+        finish();
     }
 
     @Override
@@ -45,5 +39,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
     @Override
     public void showServerFailureDialog() {
         showFailureDialog(getString(R.string.can_not_connect_to_server));
+    }
+
+    protected void setUpActionBar(String title, boolean isBackVisible) {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(title);
+
+        // set back button
+        if (isBackVisible) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }

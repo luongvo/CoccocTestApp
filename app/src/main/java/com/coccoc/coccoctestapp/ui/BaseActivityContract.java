@@ -8,6 +8,8 @@ public interface BaseActivityContract {
 
     interface View {
 
+        void finishScreen();
+
         void showLoadingDialog();
 
         void dismissLoadingDialog();

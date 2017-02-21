@@ -1,5 +1,6 @@
 package com.coccoc.coccoctestapp.ui.detail;
 
+import com.coccoc.coccoctestapp.models.Movie;
 import com.coccoc.coccoctestapp.ui.BaseActivityContract;
 
 /**
@@ -10,7 +11,7 @@ public interface MovieDetailContract {
 
     interface View extends BaseActivityContract.View {
 
-        void initUI();
+        void initUI(Movie movie);
     }
 
     interface Presenter extends BaseActivityContract.Presenter {
